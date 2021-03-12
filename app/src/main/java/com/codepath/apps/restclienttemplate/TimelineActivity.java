@@ -95,6 +95,7 @@ public class TimelineActivity extends AppCompatActivity {
                 Log.i(TAG, "Showing data from database");
                 List<TweetWithUser> tweetWithUsers = tweetDao.recentItems();
                 List<Tweet> tweetsFromDB = TweetWithUser.getTweetList(tweetWithUsers);
+                adapter.clear();
                 adapter.addAll(tweetsFromDB);
             }
         });
@@ -169,6 +170,7 @@ public class TimelineActivity extends AppCompatActivity {
                 try {
                     final List<Tweet> tweetsFromNetwork = Tweet.fromJsonArray(jsonArray);
                     final List<User> usersFromNetwork = User.fromJsonTweetArray(tweetsFromNetwork);
+                    adapter.clear();
                     adapter.addAll(tweetsFromNetwork);
                     AsyncTask.execute(new Runnable() {
                         @Override
